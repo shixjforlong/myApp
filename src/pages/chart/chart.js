@@ -8,7 +8,7 @@ import "./chart.scss";
 function initChart(canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
-    height: height * 0.35
+    height: "190"
   });
   canvas.setChart(chart);
 
