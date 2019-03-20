@@ -12,10 +12,9 @@ import "./app.scss";
 class App extends Component {
   config = {
     pages: [
+      "pages/index/index",
       "pages/device/device",
       "pages/login/login",
-      "pages/index/index",
-      "pages/components/allDevice/allDevice",
       "pages/order/order",
       "pages/aboutMe/aboutMe"
     ],

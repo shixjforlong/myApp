@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
 import { AtTabs, AtTabsPane } from "taro-ui";
-import AllDevice from "../components/allDevice/allDevice";
+import AllDevice from "./allDevice/allDevice";
 import "./device.scss";
 
 export default class Device extends Component {
