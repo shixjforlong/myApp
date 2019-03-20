@@ -54,7 +54,8 @@ export default class allDevice extends Component {
       ]
     };
   }
-  navigate(url) {
+  navigateDetail(url, item) {
+    url = url + `?id=${item.id}&assetId=${item.assetId}`;
     Taro.navigateTo({ url: url });
   }
 
@@ -82,7 +83,11 @@ export default class allDevice extends Component {
             <View
               className="dataItem"
               key={index}
-              onClick={this.navigateDetail.bind(this, "")}
+              onClick={this.navigateDetail.bind(
+                this,
+                "../index/detail/detail",
+                item
+              )}
             >
               <View className="upItem">
                 <Text>{item.assetId}</Text>

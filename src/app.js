@@ -13,6 +13,7 @@ class App extends Component {
   config = {
     pages: [
       "pages/index/index",
+      "pages/index/detail/detail",
       "pages/device/device",
       "pages/login/login",
       "pages/order/order",

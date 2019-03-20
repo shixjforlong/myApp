@@ -39,7 +39,9 @@ export default class replenishment extends Component {
       ]
     };
   }
-  navigate(url) {
+
+  navigateDetail(url, item) {
+    url = url + `?id=${item.id}&assetId=${item.assetId}`;
     Taro.navigateTo({ url: url });
   }
 
@@ -71,7 +73,15 @@ export default class replenishment extends Component {
         >
           {deviceList.map((item, index) => {
             return (
-              <View className="deviceItem">
+              <View
+                className="deviceItem"
+                key={index}
+                onClick={this.navigateDetail.bind(
+                  this,
+                  "../index/detail/detail",
+                  item
+                )}
+              >
                 <View className="leftItem">
                   <Image src={devicePng} className="leftItemimage" />
                 </View>
