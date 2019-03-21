@@ -23,6 +23,13 @@ export default class Index extends Component {
     super(...arguments);
   }
 
+  handleClick() {
+    const { userStore } = this.props;
+    userStore.getUser(function(res) {
+      console.log(res);
+    });
+  }
+
   componentWillMount() {}
 
   componentDidMount() {}
@@ -41,7 +48,7 @@ export default class Index extends Component {
     return (
       <View className="index">
         <View className="topItem">
-          <View className="chartItem">
+          <View className="chartItem" onClick={() => this.handleClick()}>
             <Echart />
           </View>
           <View className="statisticItem">
