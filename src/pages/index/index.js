@@ -3,12 +3,15 @@ import { View, Text, ScrollView } from "@tarojs/components";
 import { AtForm, AtInput, AtButton } from "taro-ui";
 import Echart from "../chart/chart";
 import Replenishment from "./replenishment/replenishment";
+import { observer, inject } from "@tarojs/mobx";
 import "./index.scss";
 import index1Png from "../images/index1.jpg";
 import index2Png from "../images/index2.jpg";
 import index3Png from "../images/index3.jpg";
 import index4Png from "../images/index4.jpg";
 
+@inject("userStore")
+@observer
 export default class Index extends Component {
   config = {
     navigationBarTitleText: "首页",
@@ -31,6 +34,10 @@ export default class Index extends Component {
   componentDidHide() {}
 
   render() {
+    const {
+      userStore: { userName }
+    } = this.props;
+    console.log(userName);
     return (
       <View className="index">
         <View className="topItem">

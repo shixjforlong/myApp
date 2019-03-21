@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
+import { Provider } from "@tarojs/mobx";
 import Index from "./pages/index";
-
+import userStore from "./store/userStore";
 import "./app.scss";
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -8,6 +9,9 @@ import "./app.scss";
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
+const store = {
+  userStore
+};
 
 class App extends Component {
   config = {
@@ -70,7 +74,9 @@ class App extends Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    return <Index />;
+    <Provider store={store}>
+      <Index />
+    </Provider>;
   }
 }
 
