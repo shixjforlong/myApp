@@ -1,7 +1,8 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider } from "@tarojs/mobx";
 import Index from "./pages/index";
-import userStore from "./store/userStore";
+import userStore from "./stores/userStore";
+import loginStore from "./stores/loginStore";
 import "./app.scss";
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -10,16 +11,17 @@ import "./app.scss";
 //   require('nerv-devtools')
 // }
 const store = {
-  userStore
+  userStore,
+  loginStore
 };
 
 class App extends Component {
   config = {
     pages: [
+      "pages/login/login",
       "pages/index/index",
       "pages/index/detail/detail",
       "pages/device/device",
-      "pages/login/login",
       "pages/order/order",
       "pages/aboutMe/aboutMe"
     ],

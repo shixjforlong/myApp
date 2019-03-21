@@ -1,11 +1,14 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
 import { AtForm, AtInput, AtButton } from "taro-ui";
+import { observer, inject } from "@tarojs/mobx";
 import "./login.scss";
 
+@inject("loginStore")
+@observer
 export default class Index extends Component {
   config = {
-    navigationBarTitleText: "首页"
+    navigationBarTitleText: "登录"
   };
   constructor() {
     super(...arguments);
@@ -14,50 +17,47 @@ export default class Index extends Component {
       password: ""
     };
   }
-  handleNameChange(e) {
-    this.setState({
-      userName: e
+
+  handleUserNameChange = e => {
+    this.props.loginStore.setUserName(e);
+  };
+  handlePasswordChange = e => {
+    this.props.loginStore.setPassword(e);
+  };
+  handleSubmitForm = e => {
+    e.preventDefault();
+    this.props.loginStore.login().then(() => {
+      console.log("登录成功");
+      Taro.switchTab({
+        url: "../index/index"
+      });
     });
+  };
+
+  componentWillUnmount() {
+    this.props.loginStore.reset();
   }
-  handlePwdChange(e) {
-    this.setState({
-      password: e
-    });
-  }
-  onSubmit(event) {
-    console.log(this.state);
-    Taro.switchTab({
-      url: "../index/index"
-    });
-  }
-  componentWillMount() {}
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   render() {
+    const { values } = this.props.loginStore;
+
     return (
-      <AtForm onSubmit={this.onSubmit.bind(this)}>
+      <AtForm onSubmit={this.handleSubmitForm}>
         <AtInput
           name="userName"
           title="账号"
           type="text"
           placeholder="请输入账号"
-          value={this.state.userName}
-          onChange={this.handleNameChange.bind(this)}
+          value={values.username}
+          onChange={this.handleUserNameChange}
         />
         <AtInput
           name="password"
           title="密码"
           type="password"
           placeholder="请输入密码"
-          value={this.state.password}
-          onChange={this.handlePwdChange.bind(this)}
+          value={values.password}
+          onChange={this.handlePasswordChange}
         />
         <AtButton
           type="primary"
