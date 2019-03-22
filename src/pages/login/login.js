@@ -26,11 +26,13 @@ export default class Index extends Component {
   };
   handleSubmitForm = e => {
     e.preventDefault();
-    this.props.loginStore.login().then(() => {
-      console.log("登录成功");
-      Taro.switchTab({
-        url: "../index/index"
-      });
+    const { loginStore } = this.props;
+    loginStore.login().then(res => {
+      if (res.access_token) {
+        Taro.switchTab({
+          url: "../index/index"
+        });
+      }
     });
   };
 
@@ -39,7 +41,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { values } = this.props.loginStore;
+    const { username, password } = this.props.loginStore;
 
     return (
       <AtForm onSubmit={this.handleSubmitForm}>
@@ -48,7 +50,7 @@ export default class Index extends Component {
           title="账号"
           type="text"
           placeholder="请输入账号"
-          value={values.username}
+          value={username}
           onChange={this.handleUserNameChange}
         />
         <AtInput
@@ -56,7 +58,7 @@ export default class Index extends Component {
           title="密码"
           type="password"
           placeholder="请输入密码"
-          value={values.password}
+          value={password}
           onChange={this.handlePasswordChange}
         />
         <AtButton
